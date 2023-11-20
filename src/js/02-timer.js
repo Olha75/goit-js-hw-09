@@ -2,32 +2,34 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
-  const timerElements = {
-    days: document.querySelector('[data-days]'),
-    hours: document.querySelector('[data-hours]'),
-    minutes: document.querySelector('[data-minutes]'),
-    seconds: document.querySelector('[data-seconds]'),
-  };
-  const datetimePicker = flatpickr("#datetime-picker", {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      const selectedDate = selectedDates[0];
-      const currentDate = new Date();
-  
-      if (selectedDate <= currentDate) {
-        Notiflix.Notify.warning("Будь ласка, оберіть дату у майбутньому");
-        document.querySelector('[data-start]').disabled = true;
-      } else {
-        document.querySelector('[data-start]').removeAttribute('disabled');
-      }
-    },
-  });
-  
+const timerElements = {
+  days: document.querySelector('[data-days]'),
+  hours: document.querySelector('[data-hours]'),
+  minutes: document.querySelector('[data-minutes]'),
+  seconds: document.querySelector('[data-seconds]'),
+};
+
+const datetimePicker = flatpickr("#datetime-picker", {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    const selectedDate = selectedDates[0];
+    const currentDate = new Date();
+
+    if (selectedDate <= currentDate) {
+      Notiflix.Notify.warning("Будь ласка, оберіть дату у майбутньому");
+      document.querySelector('[data-start]').disabled = true;
+    } else {
+      document.querySelector('[data-start]').removeAttribute('disabled');
+    }
+  },
+});
+
 let countdownInterval;
 document.querySelector('[data-start]').addEventListener('click', clickStart);
+
 function clickStart() {
   const selectedDate = datetimePicker.selectedDates[0];
   const currentDate = new Date();
@@ -51,5 +53,5 @@ function clickStart() {
 }
 
 function addLeadingZero(value) {
-    return value.toString().padStart(2, '0');
-  }
+  return value.toString().padStart(2, '0');
+}
