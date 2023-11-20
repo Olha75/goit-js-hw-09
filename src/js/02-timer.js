@@ -27,7 +27,7 @@ import Notiflix from 'notiflix';
   });
   
 let countdownInterval;
-
+document.querySelector('[data-start]').addEventListener('click', clickStart);
 function clickStart() {
   const selectedDate = datetimePicker.selectedDates[0];
   const currentDate = new Date();
@@ -51,5 +51,5 @@ function clickStart() {
 }
 
 function addLeadingZero(value) {
-  return value.toString().padStart}
-  
+    return value.toString().padStart(2, '0');
+  }
