@@ -13,12 +13,6 @@ const inputDate = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
 let countdownInterval;
 
-// Notiflix.Notify.init({
-//   width: '300px',
-//   position: 'center-top',
-//   closeButton: false,
-// });
-
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
