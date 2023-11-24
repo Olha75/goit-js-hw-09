@@ -22,7 +22,11 @@ button {
 button {
   background-color: blue;
   color: #fff;
-  margin-left: 10px; /* Додаємо відступ між інпутом і кнопкою */
+  margin-left: 10px;
+}
+
+button:disabled {
+  background-color: grey;
 }
 
 .timer {

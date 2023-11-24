@@ -25,8 +25,8 @@ flatpickr('#datetime-picker', {
     } else {
       btnStart.disabled = false;
       inputDate.disabled = true;
+      btnStart.classList.remove('active'); 
     }
-
   },
 });
 
@@ -39,14 +39,18 @@ function onClickStart() {
 
   clearInterval(countdownInterval);
 
+  btnStart.disabled = true; 
+  btnStart.classList.remove('active'); 
+
   countdownInterval = setInterval(() => {
-    timeDifference -= 1000; // Зменшуємо час тут
+    timeDifference -= 1000;
 
     if (timeDifference <= 0) {
       clearInterval(countdownInterval);
       Notiflix.Notify.success('Відлік завершено!');
       btnStart.disabled = true;
-      timeDifference = 0; // Запобігаємо від'ємним значенням
+      btnStart.classList.remove('active'); 
+      timeDifference = 0;
     }
 
     const { days, hours, minutes, seconds } = convertMs(timeDifference);
@@ -55,7 +59,6 @@ function onClickStart() {
     timerElements.hours.textContent = addLeadingZero(hours);
     timerElements.minutes.textContent = addLeadingZero(minutes);
     timerElements.seconds.textContent = addLeadingZero(seconds);
-
   }, 1000);
 }
 
@@ -76,5 +79,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-
