@@ -34,7 +34,7 @@ btnStart.addEventListener('click', onClickStart);
 function onClickStart() {
   const selectedDate = new Date(inputDate.value);
   const currentDate = new Date();
-  const timeDifference = selectedDate - currentDate;
+ let timeDifference = selectedDate - currentDate;
 
   clearInterval(countdownInterval); 
 
