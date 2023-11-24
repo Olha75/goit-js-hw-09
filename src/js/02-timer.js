@@ -26,6 +26,7 @@ flatpickr('#datetime-picker', {
       btnStart.disabled = false;
       inputDate.disabled = true;
     }
+
   },
 });
 
@@ -34,11 +35,20 @@ btnStart.addEventListener('click', onClickStart);
 function onClickStart() {
   const selectedDate = new Date(inputDate.value);
   const currentDate = new Date();
- let timeDifference = selectedDate - currentDate;
+  let timeDifference = selectedDate - currentDate;
 
-  clearInterval(countdownInterval); 
+  clearInterval(countdownInterval);
 
   countdownInterval = setInterval(() => {
+    timeDifference -= 1000; // Зменшуємо час тут
+
+    if (timeDifference <= 0) {
+      clearInterval(countdownInterval);
+      Notiflix.Notify.success('Відлік завершено!');
+      btnStart.disabled = true;
+      timeDifference = 0; // Запобігаємо від'ємним значенням
+    }
+
     const { days, hours, minutes, seconds } = convertMs(timeDifference);
 
     timerElements.days.textContent = addLeadingZero(days);
@@ -46,13 +56,6 @@ function onClickStart() {
     timerElements.minutes.textContent = addLeadingZero(minutes);
     timerElements.seconds.textContent = addLeadingZero(seconds);
 
-    if (timeDifference <= 0) {
-      clearInterval(countdownInterval);
-      Notiflix.Notify.success('Відлік завершено!');
-      btnStart.disabled = true;
-    }
-
-    timeDifference -= 1000;
   }, 1000);
 }
 
